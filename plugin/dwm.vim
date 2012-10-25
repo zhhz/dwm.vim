@@ -105,69 +105,16 @@ function! DWM_ResizeMasterPaneWidth()
   endif
 endfunction
 
-function! DWM_GrowMaster()
-  if winnr() == 1
-    exec "vertical resize +1"
-  else
-    exec "vertical resize -1"
-  endif
-  if exists("g:dwm_master_pane_width") && g:dwm_master_pane_width
-    let g:dwm_master_pane_width += 1
-  else
-    let g:dwm_master_pane_width = ((&columns)/2)+1
-  endif
-endfunction
-
-function! DWM_ShrinkMaster()
-  if winnr() == 1
-    exec "vertical resize -1"
-  else
-    exec "vertical resize +1"
-  endif
-  if exists("g:dwm_master_pane_width") && g:dwm_master_pane_width
-    let g:dwm_master_pane_width -= 1
-  else
-    let g:dwm_master_pane_width = ((&columns)/2)-1
-  endif
-endfunction
-
-function! DWM_Rotate(clockwise)
-  call DWM_Stack(a:clockwise)
-  if a:clockwise
-    wincmd W
-  else
-    wincmd w
-  endif
-  wincmd H
-  call DWM_ResizeMasterPaneWidth()
-endfunction
-
-nnoremap <silent> <Plug>DWMRotateCounterclockwise :call DWM_Rotate(0)<CR>
-nnoremap <silent> <Plug>DWMRotateClockwise        :call DWM_Rotate(1)<CR>
-
 nnoremap <silent> <Plug>DWMNew   :call DWM_New()<CR>
 nnoremap <silent> <Plug>DWMClose :exec DWM_Close()<CR>
 nnoremap <silent> <Plug>DWMFocus :call DWM_Focus()<CR>
-
-nnoremap <silent> <Plug>DWMGrowMaster   :call DWM_GrowMaster()<CR>
-nnoremap <silent> <Plug>DWMShrinkMaster :call DWM_ShrinkMaster()<CR>
 
 if !exists('g:dwm_map_keys')
   let g:dwm_map_keys = 1
 endif
 
 if g:dwm_map_keys
-  nnoremap <C-J> <C-W>w
-  nnoremap <C-K> <C-W>W
-
-  nmap <C-,> <Plug>DWMRotateCounterclockwise
-  nmap <C-.> <Plug>DWMRotateClockwise
-
   nmap <C-N> <Plug>DWMNew
   nmap <C-C> <Plug>DWMClose
-  nmap <C-@> <Plug>DWMFocus
   nmap <C-Space> <Plug>DWMFocus
-
-  nmap <C-L> <Plug>DWMGrowMaster
-  nmap <C-H> <Plug>DWMShrinkMaster
 endif
