@@ -116,5 +116,6 @@ endif
 if g:dwm_map_keys
   nmap <C-N> <Plug>DWMNew
   nmap <C-C> <Plug>DWMClose
+  nmap <C-@> <Plug>DWMFocus>>
   nmap <C-Space> <Plug>DWMFocus
 endif
