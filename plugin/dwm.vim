@@ -147,7 +147,7 @@ if g:dwm_map_keys
 
   nmap <C-N> <Plug>DWMNew
   nmap <C-C> <Plug>DWMClose
-  "nmap <C-Space> <Plug>DWMFocus
+  nmap <C-@> <Plug>DWMSwap
   nmap <C-Space> <Plug>DWMSwap
 endif
 
