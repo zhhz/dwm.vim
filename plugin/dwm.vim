@@ -105,6 +105,34 @@ function! DWM_ResizeMasterPaneWidth()
   endif
 endfunction
 
+function! DWM_MarkWindow()
+    let g:markedWinNum = winnr()
+endfunction
+
+function! DWM_Swap()
+    " mark current window
+    let l:curwin = winnr()
+
+    " switch to the 1 window
+    1wincmd w
+    " mark the window info
+    let curNum = winnr()
+    let curBuf = bufnr( "%" )
+
+    " make the marked window be the 1 window
+    exe l:curwin . "wincmd w"
+
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr( "%" )
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf
+endfunction
+
+nnoremap <silent> <Plug>DWMSwap  :call DWM_Swap()<CR>
 nnoremap <silent> <Plug>DWMNew   :call DWM_New()<CR>
 nnoremap <silent> <Plug>DWMClose :exec DWM_Close()<CR>
 nnoremap <silent> <Plug>DWMFocus :call DWM_Focus()<CR>
@@ -119,6 +147,7 @@ if g:dwm_map_keys
 
   nmap <C-N> <Plug>DWMNew
   nmap <C-C> <Plug>DWMClose
-  nmap <C-@> <Plug>DWMFocus>>
-  nmap <C-Space> <Plug>DWMFocus
+  "nmap <C-Space> <Plug>DWMFocus
+  nmap <C-Space> <Plug>DWMSwap
 endif
+
