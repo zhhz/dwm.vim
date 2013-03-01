@@ -145,7 +145,7 @@ if g:dwm_map_keys
   "set master pane width to 60% of editor width
   let g:dwm_master_pane_width="60%"
 
-  nmap <C-N> <Plug>DWMNew
+  " nmap <C-N> <Plug>DWMNew
   nmap <C-C> <Plug>DWMClose
   nmap <C-@> <Plug>DWMSwap
   nmap <C-Space> <Plug>DWMSwap
